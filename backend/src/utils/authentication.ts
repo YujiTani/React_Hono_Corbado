@@ -19,7 +19,7 @@ if (!frontendAPI) {
 if (!backendAPI) {
     throw Error("Backend API URL is not set");
 }
-// Initialize the Corbado Node.js SDK with the configuration
+// Corbado Node.js SDKの設定を初期化する
 const config = new Config(projectID, apiSecret, frontendAPI, backendAPI);
 const sdk = new SDK(config);
 
@@ -31,10 +31,10 @@ export async function getAuthenticatedUserFromCookie(c: Context) {
     }
 
     try {
-        // Your existing token validation logic
+        // 既存のトークン検証ロジック
         return await sdk.sessions().validateToken(sessionToken);
     } catch (error) {
-        // Log the error if needed
+        // 必要に応じてエラーをログに記録
         return null;
     }
 }
@@ -52,8 +52,8 @@ export async function getAuthenticatedUserFromAuthorizationHeader(c: Context) {
 }
 
 
-// Retrieve all identifiers for a given user ID
+// 指定されたユーザーIDに関連付けられた全ての識別子を取得する
 export function getUserIdentifiers(userId: string) {
-    // List user identifiers sorted by creation date in descending order
+    // 作成日の降順でユーザー識別子を一覧表示する
     return sdk.identifiers().listByUserId(userId);
 }
