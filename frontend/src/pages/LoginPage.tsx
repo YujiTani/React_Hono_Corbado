@@ -29,9 +29,8 @@ export default function LoginPage() {
             <h1>Login</h1>
             <CorbadoAuth
                 onLoggedIn={() => {
-                    // do nothing here. We have to wait for a backend response
-                    // to check whether the user has gone through onboarding already.
-                    // The backend call is made in the user store.
+                    // ここでは何もしません。ユーザーが既にオンボーディングを完了しているかを確認するために、バックエンドの応答を待つ必要があります。
+                    // バックエンドの呼び出しはユーザーストアで行われています。
                 }}
                 initialBlock="login-init"
             />

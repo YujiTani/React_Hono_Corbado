@@ -17,11 +17,11 @@ export default function App() {
     return (
         <CorbadoProvider
             projectId={import.meta.env.VITE_CORBADO_PROJECT_ID}
-            // enable dark mode for the Corbado UI
+            // Corbado UI のダークモードを有効にする
             darkMode="on"
-            // apply our custom styles to the Corbado UI
+            // Corbado UI にカスタムスタイルを適用する
             theme="cbo-custom-styles"
-            // use our custom translations
+            // カスタム翻訳を利用する
             customTranslations={{ en: englishTranslations }}
         >
             <QueryClientProvider client={queryClient}>
