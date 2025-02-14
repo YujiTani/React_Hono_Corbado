@@ -11,6 +11,7 @@ type Env = { Variables: { user: User | null } };
 export const authenticationMiddleware = createMiddleware<Env>(
     async (c, next) => {
         let user = await getAuthenticatedUserFromCookie(c);
+        // クッキーからユーザーを取得できない場合、Authorizationヘッダーから取得する
         user ??= await getAuthenticatedUserFromAuthorizationHeader(c);
         c.set("user", user);
         await next();

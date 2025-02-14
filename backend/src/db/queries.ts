@@ -2,21 +2,21 @@
 import db, { type User } from "./db.js";
 
 /**
- * Retrieves a user by their corbadoUserId.
- * @param corbadoUserId - The unique corbadoUserId of the user.
- * @returns The user object or undefined if not found.
+ * ユーザーをcorbadoUserIdで取得する
+ * @param corbadoUserId - ユーザーの一意のcorbadoUserId
+ * @returns ユーザーオブジェクトまたは見つからない場合はundefined
  */
 export function getUser(corbadoUserId?: string): User | undefined {
     return db.data.users.find((user) => user.corbado_user_id === corbadoUserId);
 }
 
 /**
- * Inserts a new user into the database.
- * @param corbadoUserId - The unique corbadoUserId of the user.
- * @returns The newly created user object.
+ * 新しいユーザーをデータベースに挿入する
+ * @param corbadoUserId - ユーザーの一意のcorbadoUserId
+ * @returns 新しく作成されたユーザーオブジェクト
  */
 export async function insertUser(corbadoUserId: string) {
-    // check if user already exists
+    // ユーザーが既に存在するか確認する
     if (getUser(corbadoUserId)) {
         throw new Error("User already exists");
     }
@@ -30,9 +30,9 @@ export async function insertUser(corbadoUserId: string) {
 }
 
 /**
- * Updates the city of a user identified by corbadoUserId.
- * @param corbadoUserId - The unique corbadoUserId of the user.
- * @param city - The new city to set.
+ * ユーザーをcorbadoUserIdで更新する
+ * @param corbadoUserId - ユーザーの一意のcorbadoUserId
+ * @param city - 新しい都市名
  */
 export async function updateUserCity(corbadoUserId: string, city: string) {
     await db.update(({ users }) => {
