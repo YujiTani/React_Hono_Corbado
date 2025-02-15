@@ -18,7 +18,17 @@ class App {
 
     public listen() {
         const port = Number(process.env.PORT) || 3001;
-        console.log(`Server is running on http://localhost:${port}`);
+        const backendUrl = process.env.NODE_ENV === 'development'
+            ? `http://localhost:${port}`
+            : process.env.BACKEND_URL;
+
+        if (!backendUrl) {
+            throw new Error('BACKEND_URL must be set in production environment');
+        }
+
+        console.log(`Server is running on ${backendUrl}`);
+        console.log(`Environment: ${process.env.NODE_ENV}`);
+        
         serve({
             fetch: this.app.fetch,
             port,
@@ -26,11 +36,19 @@ class App {
     }
 
     private initializeMiddlewares() {
+        const corsOrigin = process.env.NODE_ENV === 'development'
+            ? "http://localhost:3000"
+            : process.env.FRONTEND_URL;
+
+        if (!corsOrigin) {
+            throw new Error('FRONTEND_URL must be set in production environment');
+        }
+
         this.app.use(logger());
         this.app.use(compress());
         this.app.use(
             cors({
-                origin: "http://localhost:3000",
+                origin: corsOrigin,
                 credentials: true,
             }),
         );

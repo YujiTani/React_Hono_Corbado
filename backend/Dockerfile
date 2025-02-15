@@ -1,20 +1,17 @@
-# ベースイメージとしてNode.jsの最新のLTSバージョンを使用
 FROM node:20
 
-# 作業ディレクトリを作成
 WORKDIR /app
 
-# package.jsonとpackage-lock.jsonをコピー
 COPY package*.json ./
-
-# 依存関係をインストール
 RUN npm install
 
-# アプリケーションのソースコードをコピー
 COPY . .
+RUN npm run build
 
-# アプリケーションを実行するためのポートを指定
-EXPOSE 3000
+EXPOSE 3001
 
-# アプリケーションを起動
-CMD ["npm", "run", "dev"]
+# 本番環境用の環境変数設定
+ENV NODE_ENV=production
+ENV PORT=3001
+
+CMD ["npm", "start"]

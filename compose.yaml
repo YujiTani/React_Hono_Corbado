@@ -1,19 +1,19 @@
-
 services:
   api:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
-      - 3000:3000
+      - 3001:3000
     environment:
       - CORBADO_PROJECT_ID=${CORBADO_PROJECT_ID}
       - CORBADO_API_SECRET=${CORBADO_API_SECRET}
       - CORBADO_FRONTEND_API=${CORBADO_FRONTEND_API}
+      - FRONTEND_URL=${FRONTEND_URL}
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - 3000:3000
