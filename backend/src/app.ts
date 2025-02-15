@@ -27,7 +27,6 @@ class App {
         }
 
         console.log(`Server is running on ${backendUrl}`);
-        console.log(`Environment: ${process.env.NODE_ENV}`);
         
         serve({
             fetch: this.app.fetch,
